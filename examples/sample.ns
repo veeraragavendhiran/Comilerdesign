@@ -1,0 +1,6 @@
+MODEL anomaly_detector
+INPUT sound, vibration
+FEATURE extract RMS, variance
+TRAIN model USING threshold 0.7
+IF anomaly > THRESHOLD THEN ALERT
+ELSE LOG "Normal"

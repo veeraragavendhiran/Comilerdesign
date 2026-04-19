@@ -1,0 +1,428 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> model_decl input_decl feature_decl train_decl condition_decl
+Rule 2     model_decl -> MODEL IDENTIFIER
+Rule 3     input_decl -> INPUT ident_list
+Rule 4     feature_decl -> FEATURE EXTRACT ident_list
+Rule 5     train_decl -> TRAIN R_MODEL USING R_THRESHOLD NUMBER
+Rule 6     condition_decl -> IF IDENTIFIER GT THRESHOLD THEN action ELSE action
+Rule 7     condition_decl -> IF IDENTIFIER LT THRESHOLD THEN action ELSE action
+Rule 8     condition_decl -> IF IDENTIFIER EQ THRESHOLD THEN action ELSE action
+Rule 9     action -> ALERT
+Rule 10    action -> LOG STRING_LITERAL
+Rule 11    ident_list -> IDENTIFIER
+Rule 12    ident_list -> IDENTIFIER COMMA ident_list
+
+Terminals, with rules where they appear
+
+ALERT                : 9
+COMMA                : 12
+ELSE                 : 6 7 8
+EQ                   : 8
+EXTRACT              : 4
+FEATURE              : 4
+GT                   : 6
+IDENTIFIER           : 2 6 7 8 11 12
+IF                   : 6 7 8
+INPUT                : 3
+LOG                  : 10
+LT                   : 7
+MODEL                : 2
+NUMBER               : 5
+R_MODEL              : 5
+R_THRESHOLD          : 5
+STRING_LITERAL       : 10
+THEN                 : 6 7 8
+THRESHOLD            : 6 7 8
+TRAIN                : 5
+USING                : 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+action               : 6 6 7 7 8 8
+condition_decl       : 1
+feature_decl         : 1
+ident_list           : 3 4 12
+input_decl           : 1
+model_decl           : 1
+program              : 0
+train_decl           : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . model_decl input_decl feature_decl train_decl condition_decl
+    (2) model_decl -> . MODEL IDENTIFIER
+
+    MODEL           shift and go to state 3
+
+    program                        shift and go to state 1
+    model_decl                     shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> model_decl . input_decl feature_decl train_decl condition_decl
+    (3) input_decl -> . INPUT ident_list
+
+    INPUT           shift and go to state 5
+
+    input_decl                     shift and go to state 4
+
+state 3
+
+    (2) model_decl -> MODEL . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 6
+
+
+state 4
+
+    (1) program -> model_decl input_decl . feature_decl train_decl condition_decl
+    (4) feature_decl -> . FEATURE EXTRACT ident_list
+
+    FEATURE         shift and go to state 8
+
+    feature_decl                   shift and go to state 7
+
+state 5
+
+    (3) input_decl -> INPUT . ident_list
+    (11) ident_list -> . IDENTIFIER
+    (12) ident_list -> . IDENTIFIER COMMA ident_list
+
+    IDENTIFIER      shift and go to state 10
+
+    ident_list                     shift and go to state 9
+
+state 6
+
+    (2) model_decl -> MODEL IDENTIFIER .
+
+    INPUT           reduce using rule 2 (model_decl -> MODEL IDENTIFIER .)
+
+
+state 7
+
+    (1) program -> model_decl input_decl feature_decl . train_decl condition_decl
+    (5) train_decl -> . TRAIN R_MODEL USING R_THRESHOLD NUMBER
+
+    TRAIN           shift and go to state 12
+
+    train_decl                     shift and go to state 11
+
+state 8
+
+    (4) feature_decl -> FEATURE . EXTRACT ident_list
+
+    EXTRACT         shift and go to state 13
+
+
+state 9
+
+    (3) input_decl -> INPUT ident_list .
+
+    FEATURE         reduce using rule 3 (input_decl -> INPUT ident_list .)
+
+
+state 10
+
+    (11) ident_list -> IDENTIFIER .
+    (12) ident_list -> IDENTIFIER . COMMA ident_list
+
+    FEATURE         reduce using rule 11 (ident_list -> IDENTIFIER .)
+    TRAIN           reduce using rule 11 (ident_list -> IDENTIFIER .)
+    COMMA           shift and go to state 14
+
+
+state 11
+
+    (1) program -> model_decl input_decl feature_decl train_decl . condition_decl
+    (6) condition_decl -> . IF IDENTIFIER GT THRESHOLD THEN action ELSE action
+    (7) condition_decl -> . IF IDENTIFIER LT THRESHOLD THEN action ELSE action
+    (8) condition_decl -> . IF IDENTIFIER EQ THRESHOLD THEN action ELSE action
+
+    IF              shift and go to state 16
+
+    condition_decl                 shift and go to state 15
+
+state 12
+
+    (5) train_decl -> TRAIN . R_MODEL USING R_THRESHOLD NUMBER
+
+    R_MODEL         shift and go to state 17
+
+
+state 13
+
+    (4) feature_decl -> FEATURE EXTRACT . ident_list
+    (11) ident_list -> . IDENTIFIER
+    (12) ident_list -> . IDENTIFIER COMMA ident_list
+
+    IDENTIFIER      shift and go to state 10
+
+    ident_list                     shift and go to state 18
+
+state 14
+
+    (12) ident_list -> IDENTIFIER COMMA . ident_list
+    (11) ident_list -> . IDENTIFIER
+    (12) ident_list -> . IDENTIFIER COMMA ident_list
+
+    IDENTIFIER      shift and go to state 10
+
+    ident_list                     shift and go to state 19
+
+state 15
+
+    (1) program -> model_decl input_decl feature_decl train_decl condition_decl .
+
+    $end            reduce using rule 1 (program -> model_decl input_decl feature_decl train_decl condition_decl .)
+
+
+state 16
+
+    (6) condition_decl -> IF . IDENTIFIER GT THRESHOLD THEN action ELSE action
+    (7) condition_decl -> IF . IDENTIFIER LT THRESHOLD THEN action ELSE action
+    (8) condition_decl -> IF . IDENTIFIER EQ THRESHOLD THEN action ELSE action
+
+    IDENTIFIER      shift and go to state 20
+
+
+state 17
+
+    (5) train_decl -> TRAIN R_MODEL . USING R_THRESHOLD NUMBER
+
+    USING           shift and go to state 21
+
+
+state 18
+
+    (4) feature_decl -> FEATURE EXTRACT ident_list .
+
+    TRAIN           reduce using rule 4 (feature_decl -> FEATURE EXTRACT ident_list .)
+
+
+state 19
+
+    (12) ident_list -> IDENTIFIER COMMA ident_list .
+
+    FEATURE         reduce using rule 12 (ident_list -> IDENTIFIER COMMA ident_list .)
+    TRAIN           reduce using rule 12 (ident_list -> IDENTIFIER COMMA ident_list .)
+
+
+state 20
+
+    (6) condition_decl -> IF IDENTIFIER . GT THRESHOLD THEN action ELSE action
+    (7) condition_decl -> IF IDENTIFIER . LT THRESHOLD THEN action ELSE action
+    (8) condition_decl -> IF IDENTIFIER . EQ THRESHOLD THEN action ELSE action
+
+    GT              shift and go to state 22
+    LT              shift and go to state 23
+    EQ              shift and go to state 24
+
+
+state 21
+
+    (5) train_decl -> TRAIN R_MODEL USING . R_THRESHOLD NUMBER
+
+    R_THRESHOLD     shift and go to state 25
+
+
+state 22
+
+    (6) condition_decl -> IF IDENTIFIER GT . THRESHOLD THEN action ELSE action
+
+    THRESHOLD       shift and go to state 26
+
+
+state 23
+
+    (7) condition_decl -> IF IDENTIFIER LT . THRESHOLD THEN action ELSE action
+
+    THRESHOLD       shift and go to state 27
+
+
+state 24
+
+    (8) condition_decl -> IF IDENTIFIER EQ . THRESHOLD THEN action ELSE action
+
+    THRESHOLD       shift and go to state 28
+
+
+state 25
+
+    (5) train_decl -> TRAIN R_MODEL USING R_THRESHOLD . NUMBER
+
+    NUMBER          shift and go to state 29
+
+
+state 26
+
+    (6) condition_decl -> IF IDENTIFIER GT THRESHOLD . THEN action ELSE action
+
+    THEN            shift and go to state 30
+
+
+state 27
+
+    (7) condition_decl -> IF IDENTIFIER LT THRESHOLD . THEN action ELSE action
+
+    THEN            shift and go to state 31
+
+
+state 28
+
+    (8) condition_decl -> IF IDENTIFIER EQ THRESHOLD . THEN action ELSE action
+
+    THEN            shift and go to state 32
+
+
+state 29
+
+    (5) train_decl -> TRAIN R_MODEL USING R_THRESHOLD NUMBER .
+
+    IF              reduce using rule 5 (train_decl -> TRAIN R_MODEL USING R_THRESHOLD NUMBER .)
+
+
+state 30
+
+    (6) condition_decl -> IF IDENTIFIER GT THRESHOLD THEN . action ELSE action
+    (9) action -> . ALERT
+    (10) action -> . LOG STRING_LITERAL
+
+    ALERT           shift and go to state 34
+    LOG             shift and go to state 35
+
+    action                         shift and go to state 33
+
+state 31
+
+    (7) condition_decl -> IF IDENTIFIER LT THRESHOLD THEN . action ELSE action
+    (9) action -> . ALERT
+    (10) action -> . LOG STRING_LITERAL
+
+    ALERT           shift and go to state 34
+    LOG             shift and go to state 35
+
+    action                         shift and go to state 36
+
+state 32
+
+    (8) condition_decl -> IF IDENTIFIER EQ THRESHOLD THEN . action ELSE action
+    (9) action -> . ALERT
+    (10) action -> . LOG STRING_LITERAL
+
+    ALERT           shift and go to state 34
+    LOG             shift and go to state 35
+
+    action                         shift and go to state 37
+
+state 33
+
+    (6) condition_decl -> IF IDENTIFIER GT THRESHOLD THEN action . ELSE action
+
+    ELSE            shift and go to state 38
+
+
+state 34
+
+    (9) action -> ALERT .
+
+    ELSE            reduce using rule 9 (action -> ALERT .)
+    $end            reduce using rule 9 (action -> ALERT .)
+
+
+state 35
+
+    (10) action -> LOG . STRING_LITERAL
+
+    STRING_LITERAL  shift and go to state 39
+
+
+state 36
+
+    (7) condition_decl -> IF IDENTIFIER LT THRESHOLD THEN action . ELSE action
+
+    ELSE            shift and go to state 40
+
+
+state 37
+
+    (8) condition_decl -> IF IDENTIFIER EQ THRESHOLD THEN action . ELSE action
+
+    ELSE            shift and go to state 41
+
+
+state 38
+
+    (6) condition_decl -> IF IDENTIFIER GT THRESHOLD THEN action ELSE . action
+    (9) action -> . ALERT
+    (10) action -> . LOG STRING_LITERAL
+
+    ALERT           shift and go to state 34
+    LOG             shift and go to state 35
+
+    action                         shift and go to state 42
+
+state 39
+
+    (10) action -> LOG STRING_LITERAL .
+
+    ELSE            reduce using rule 10 (action -> LOG STRING_LITERAL .)
+    $end            reduce using rule 10 (action -> LOG STRING_LITERAL .)
+
+
+state 40
+
+    (7) condition_decl -> IF IDENTIFIER LT THRESHOLD THEN action ELSE . action
+    (9) action -> . ALERT
+    (10) action -> . LOG STRING_LITERAL
+
+    ALERT           shift and go to state 34
+    LOG             shift and go to state 35
+
+    action                         shift and go to state 43
+
+state 41
+
+    (8) condition_decl -> IF IDENTIFIER EQ THRESHOLD THEN action ELSE . action
+    (9) action -> . ALERT
+    (10) action -> . LOG STRING_LITERAL
+
+    ALERT           shift and go to state 34
+    LOG             shift and go to state 35
+
+    action                         shift and go to state 44
+
+state 42
+
+    (6) condition_decl -> IF IDENTIFIER GT THRESHOLD THEN action ELSE action .
+
+    $end            reduce using rule 6 (condition_decl -> IF IDENTIFIER GT THRESHOLD THEN action ELSE action .)
+
+
+state 43
+
+    (7) condition_decl -> IF IDENTIFIER LT THRESHOLD THEN action ELSE action .
+
+    $end            reduce using rule 7 (condition_decl -> IF IDENTIFIER LT THRESHOLD THEN action ELSE action .)
+
+
+state 44
+
+    (8) condition_decl -> IF IDENTIFIER EQ THRESHOLD THEN action ELSE action .
+
+    $end            reduce using rule 8 (condition_decl -> IF IDENTIFIER EQ THRESHOLD THEN action ELSE action .)
+

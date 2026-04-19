@@ -1,0 +1,18 @@
+// Abstract Syntax Tree
+digraph {
+	1 [label=ProgramNode]
+	2 [label="ConditionNode\nanomaly > THRESHOLD"]
+	1 -> 2
+	3 [label="ActionNode\nLOG Normal"]
+	2 -> 3
+	4 [label="ActionNode\nALERT"]
+	2 -> 4
+	5 [label="FeatureNode\n[RMS, variance]"]
+	1 -> 5
+	6 [label="InputNode\n[sound, vibration]"]
+	1 -> 6
+	7 [label="ModelNode\nanomaly_detector"]
+	1 -> 7
+	8 [label="TrainNode\n0.7"]
+	1 -> 8
+}
